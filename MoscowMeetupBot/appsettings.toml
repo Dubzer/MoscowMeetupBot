@@ -1,0 +1,32 @@
+﻿[MoscowMeetupBot]
+ChatId = 1  #  Your chat ID goes here
+
+[Telegram]
+BotToken = ""   # Your bot's token goes here
+
+[Serilog]
+Using = [
+    'Serilog.Sinks.Console',
+    'Serilog.Sinks.File',
+]
+
+[Serilog.MinimumLevel]
+Default = 'Information'
+
+[[Serilog.WriteTo]]
+Name = 'Console'
+    [Serilog.WriteTo.Args]
+    outputTemplate = '{Timestamp:yyyy-MM-dd HH:mm:ss.fff} [{Level:u4}] {SourceContext} {Message}{NewLine}{Exception}'
+    restrictedToMinimumLevel = 'Information'
+
+[[Serilog.WriteTo]]
+Name = 'File'
+    [Serilog.WriteTo.Args]
+    path = 'Logs/Log-.txt'
+    outputTemplate = '{Timestamp:yyyy-MM-dd HH:mm:ss.fff} [{Level:u4}] {SourceContext} {Message}{NewLine}{Exception}'
+    fileSizeLimitBytes = 1073741824
+    retainedFileCountLimit = 62
+    rollingInterval = 'Day'
+    rollOnFileSizeLimit = true
+    restrictedToMinimumLevel = 'Information'
+    
